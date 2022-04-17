@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    # Only neede in molecule testing with no existing gitlab instance
+    gitlab_runner_skip_registration: true
+  roles:
+    - role: "ansible-role-gitlab_runner"

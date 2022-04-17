@@ -1,0 +1,27 @@
+---
+- name: Clean deleted runners
+  ansible.builtin.command: gitlab-runner verify --delete
+  changed_when: false
+
+- name: List configured runners
+  ansible.builtin.command: gitlab-runner list
+  register: configured_runners
+  changed_when: false
+
+- name: Register runner to GitLab
+  ansible.builtin.command: "gitlab-runner register {{ item.tags | join(',') | quote }} {{ item.extra_options | join(' ') }}"
+  environment:
+    REGISTER_NON_INTERACTIVE: "true"
+    RUNNER_NAME: "{{ item.name }}"
+    CI_SERVER_URL: "{{ item.url }}"
+    REGISTRATION_TOKEN: "{{ item.registration_token }}"
+    RUNNER_EXECUTOR: "{{ item.executor }}"
+  when:
+    - item.name not in configured_runners.stderr
+  with_items: "{{ gitlab_runner_configs }}"
+
+# - name: Registration code for molecule testing
+#   ansible.builtin.debug:
+# yamllint disable-line rule:line-length
+#     msg: "gitlab-runner register --non-interactive --name {{ item.name }} --url {{ item.url }} --registration-token {{ item.registration_token }} --tags {{ item.tags | join(',') }} --executor {{ item.executor }} {{ item.extra_options | join(' ') }}"
+#   with_items: "{{ gitlab_runner_configs }}"

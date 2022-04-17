@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+# Official gitlab-runner repository
+
+[runner_gitlab_runner]
+baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/{{ ansible_distribution_major_version }}/$basearch
+repo_gpgcheck=1
+gpgcheck=1
+enabled=1
+gpgkey={{ gitlab_runner_repository_key }}
+       {{ gitlab_runner_repository_key_pub }}
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+
+[runner_gitlab_runner-source]
+name=runner_gitlab-runner-source
+baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/{{ ansible_distribution_major_version }}/SRPMS
+repo_gpgcheck=1
+gpgcheck=1
+enabled=1
+gpgkey={{ gitlab_runner_repository_key }}
+       {{ gitlab_runner_repository_key_pub }}
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300

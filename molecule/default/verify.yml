@@ -1,0 +1,72 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: SmokeTests
+      ansible.builtin.debug:
+        msg:
+          - "ansible_version => {{ansible_version}}"
+          - "ansible_distribution => {{ ansible_distribution }}"
+          - "ansible_distribution_major_version => {{ ansible_distribution_major_version }}"
+          - "ansible_os_family  => {{ ansible_os_family}}"
+          - "ansible_system  => {{ ansible_system }}"
+
+    - name: Debian/Ubuntu | Test if repository exists
+      ansible.builtin.lineinfile:
+        name: '/etc/apt/sources.list.d/gitlab-runner.list'
+        line: '# Official gitlab-runner repository'
+        state: present
+      check_mode: true
+      register: gitlab_runner_repository
+      failed_when: (gitlab_runner_repository is changed) or (gitlab_runner_repository is failed)
+      when: ansible_os_family == "Debian"
+
+    - name: RedHat/CentOS | Test if repository exists
+      ansible.builtin.lineinfile:
+        name: '/etc/yum.repos.d/gitlab-runner.repo'
+        line: '# Official gitlab-runner repository'
+        state: present
+      check_mode: true
+      register: gitlab_runner_repository
+      failed_when: (gitlab_runner_repository is changed) or (gitlab_runner_repository is failed)
+      when: ansible_os_family == "RedHat"
+
+    - name: Test if package is installed
+      ansible.builtin.package:
+        name: 'gitlab-runner'
+        state: present
+      check_mode: true
+      register: gitlab_runner_repository
+      failed_when: (gitlab_runner_repository is changed) or (gitlab_runner_repository is failed)
+
+    - name: Test congi option in
+      ansible.builtin.lineinfile:
+        dest: "/etc/gitlab-runner/config.toml"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      check_mode: true
+      register: gitlab_runner_config
+      failed_when: (gitlab_runner_config is changed) or (gitlab_runner_config is failed)
+      with_items:
+        - regexp: '^concurrent ='
+          line: 'concurrent = {{ ansible_processor_vcpus }}'
+        - regexp: '^check_interval ='
+          line: 'check_interval = 5'
+        - regexp: '^log_level ='
+          line: 'log_level = "warning"'
+        - regexp: '^log_format ='
+          line: 'log_format = "json"'
+        - regexp: '^sentry_dsn ='
+          line: 'sentry_dsn = ""'
+        - regexp: '^listen_address ='
+          line: 'listen_address = "[::]:9299"'
+        - regexp: '^  session_timeout ='
+          line: '  session_timeout = 1800'
+        - regexp: '^  listen_address ='
+          line: '  listen_address = "[::]:8093"'
+        - regexp: '^  advertise_address ='
+          line: '  advertise_address = "{{ inventory_hostname}}:8093"'

@@ -1,0 +1,81 @@
+---
+- name: Configure global options -> concurrent
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: ^concurrent =
+    line: concurrent = {{ gitlab_runner_concurrent }}
+    state: present
+  notify: restart gitlab-runner
+
+- name: Configure global options -> check_interval option
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: ^check_interval =
+    line: check_interval = {{ gitlab_runner_check_interval }}
+    state: present
+    insertafter: ^concurrent =
+  notify: restart gitlab-runner
+
+- name: Configure global options -> log_level
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: ^log_level =
+    line: 'log_level = "{{ gitlab_runner_log_level }}"'
+    state: present
+    insertafter: ^check_interval =
+  notify: restart gitlab-runner
+
+- name: Configure global options -> log_format
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: ^log_format =
+    line: 'log_format = "{{ gitlab_runner_log_format }}"'
+    state: present
+    insertafter: ^log_level =
+  notify: restart gitlab-runner
+
+- name: Configure global options -> sentry_dsn
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: ^sentry_dsn =
+    line: 'sentry_dsn = "{{ gitlab_runner_sentry_dsn }}"'
+    state: present
+    insertafter: ^log_format =
+  notify: restart gitlab-runner
+
+- name: Configure global options -> listen_address
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: ^listen_address =
+    line: 'listen_address = "{{ gitlab_runner_listen_address }}"'
+    state: present
+    insertafter: ^sentry_dsn =
+  notify: restart gitlab-runner
+
+
+- name: Configure global options -> session_timeout
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: "^  session_timeout ="
+    line: '  session_timeout = {{ gitlab_runner_session_timeout }}'
+    state: present
+    insertafter: "^[session_server]"
+  notify: restart gitlab-runner
+
+- name: Configure global options -> listen_address
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: "^  listen_address ="
+    line: '  listen_address = "{{ gitlab_runner_session_listen_address }}"'
+    state: present
+    insertafter: "^  session_timeout"
+  notify: restart gitlab-runner
+
+- name: Configure global options -> advertise_address
+  ansible.builtin.lineinfile:
+    dest: "/etc/gitlab-runner/config.toml"
+    regexp: "^  advertise_address ="
+    line: '  advertise_address = "{{ gitlab_runner_session_advertise_address }}"'
+    state: present
+    insertafter: "^  listen_address ="
+  notify: restart gitlab-runner

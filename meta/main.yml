@@ -1,0 +1,37 @@
+---
+galaxy_info:
+  author: Mullholland
+  namespace: mullholland
+  role_name: gitlab_runner
+  description: description
+  license: MIT
+  company: none
+  min_ansible_version: "2.10"
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Amazon
+      versions:
+        - Candidate
+    - name: Ubuntu
+      versions:
+        - all
+        # - bionic
+        # - focal
+        # - jammy
+    - name: Debian
+      versions:
+        - all
+        # - stretch
+        # - buster
+        # - bullseye
+
+  galaxy_tags:
+    - development
+    - packaging
+    - system
+
+dependencies: []

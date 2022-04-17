@@ -1,0 +1,6 @@
+---
+gitlab_runner_package_dependencies:
+  - gnupg
+  - apt-transport-https
+  - debian-archive-keyring
+  - ca-certificates

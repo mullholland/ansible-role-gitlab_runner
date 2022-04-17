@@ -1,0 +1,4 @@
+---
+gitlab_runner_package_dependencies:
+  - yum-utils
+  - ca-certificates

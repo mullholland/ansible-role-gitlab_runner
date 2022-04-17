@@ -1,0 +1,21 @@
+---
+- name: Include distribution specific variables
+  ansible.builtin.include_vars: "{{ item }}"
+  with_first_found:
+    - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_distribution }}.yml'
+    - '{{ ansible_os_family }}.yml'
+    - '{{ ansible_system }}.yml'
+
+- name: add gitlab-runner repository
+  include_tasks: repository.yml
+
+- name: install gitlab-runner
+  include_tasks: runner-install.yml
+
+- name: configure gitlab-runner
+  include_tasks: runner-config.yml
+
+- name: register gitlab-runner
+  include_tasks: runner-register.yml
+  when: not gitlab_runner_skip_registration | bool
