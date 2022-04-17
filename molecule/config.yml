@@ -2,6 +2,10 @@
 molecule_exceptions:
   - variation: Fedora
     reason: "No packages available"
+  - variation: centos-stream9
+    reason: "No packages available"
+  - variation: amazonlinux
+    reason: "No packages available"
 molecule_scenarios:
   - scenario: "default"
     ansible: ["previous", "current", "next"]
@@ -13,11 +17,6 @@ molecule_scenarios:
       - "ubuntu2004"
       - "centos7"
       - "centos-stream8"
-      - "centos-stream9"
       - "ubi8"
-      - "amazonlinux"
       - "rockylinux8"
       - "almalinux8"
-#  - scenario: "alternative"
-#    ansible: ["previous", "current", "next"]
-#    platforms: ["ubuntu1604", "ubuntu1804", "ubuntu2004", "centos7", "centos8"]
