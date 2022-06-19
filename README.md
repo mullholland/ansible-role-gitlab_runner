@@ -61,7 +61,7 @@ gitlab_runner_session_timeout: "1800"
 gitlab_runner_session_listen_address: "[::]:8093"
 # The URL to access the session server.
 # GitLab Runner exposes it to GitLab
-gitlab_runner_session_advertise_address: "{{ inventory_hostname}}:8093"
+gitlab_runner_session_advertise_address: "{{ inventory_hostname }}:8093"
 
 # Register options
 gitlab_runner_configs:
@@ -127,6 +127,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/m
 -   [debian11](https://hub.docker.com/r/mullholland/docker-molecule-debian11)
 -   [ubuntu1804](https://hub.docker.com/r/mullholland/docker-molecule-ubuntu1804)
 -   [ubuntu2004](https://hub.docker.com/r/mullholland/docker-molecule-ubuntu2004)
+-   [ubuntu2204](https://hub.docker.com/r/mullholland/docker-molecule-ubuntu2204)
 -   [centos7](https://hub.docker.com/r/mullholland/docker-molecule-centos7)
 -   [centos-stream8](https://hub.docker.com/r/mullholland/docker-molecule-centos-stream8)
 -   [ubi8](https://hub.docker.com/r/mullholland/docker-molecule-ubi8)
