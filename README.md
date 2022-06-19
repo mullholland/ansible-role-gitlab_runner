@@ -61,7 +61,7 @@ gitlab_runner_session_timeout: "1800"
 gitlab_runner_session_listen_address: "[::]:8093"
 # The URL to access the session server.
 # GitLab Runner exposes it to GitLab
-gitlab_runner_session_advertise_address: "{{ inventory_hostname}}:8093"
+gitlab_runner_session_advertise_address: "{{ inventory_hostname }}:8093"
 
 # Register options
 gitlab_runner_configs:
