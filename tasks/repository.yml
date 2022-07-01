@@ -20,8 +20,6 @@
 
 - name: RedHat/CentOS | Refresh yum metadata cache if repository changed
   ansible.builtin.command: yum clean metadata
-  args:
-    warn: false
   when:
     - gitlab_runner_repository_state.changed
     - ansible_os_family == "RedHat"
