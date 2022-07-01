@@ -8,7 +8,7 @@ molecule_exceptions:
     reason: "No packages available"
 molecule_scenarios:
   - scenario: "default"
-    ansible: ["previous", "current", "next"]
+    ansible: ["previous", "current", "development"]
     platforms:
       - "debian9"
       - "debian10"
