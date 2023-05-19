@@ -1,5 +1,10 @@
 # [gitlab_runner](#gitlab_runner)
 
+# **IMPORTANT**
+# This role will no longer be updated. you can use [robertdebock/ansible-role-gitlab_runner](https://github.com/robertdebock/ansible-role-gitlab_runner) as an alternative.
+
+# ---
+
 |GitHub|GitLab|
 |------|------|
 |[![github](https://github.com/mullholland/ansible-role-gitlab_runner/workflows/Ansible%20Molecule/badge.svg)](https://github.com/mullholland/ansible-role-gitlab_runner/actions)|[![gitlab](https://gitlab.com/mullholland/ansible-role-gitlab_runner/badges/main/pipeline.svg)](https://gitlab.com/mullholland/ansible-role-gitlab_runner)|
