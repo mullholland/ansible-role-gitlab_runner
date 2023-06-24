@@ -1,5 +1,5 @@
 ---
-- name: RedHat/CentOS | Add GitLab runner repository
+- name: repository | RedHat/CentOS | Add GitLab runner repository
   ansible.builtin.template:
     src: "repository/rpm.j2"
     dest: "/etc/yum.repos.d/gitlab-runner.repo"
@@ -8,7 +8,7 @@
     mode: "0644"
   when: ansible_os_family == "RedHat"
 
-- name: RedHat/CentOS | Add GitLab runner repository keys
+- name: repository | RedHat/CentOS | Add GitLab runner repository keys
   ansible.builtin.rpm_key:
     state: present
     key: "{{ item }}"
@@ -18,7 +18,7 @@
   register: gitlab_runner_repository_state
   when: ansible_os_family == "RedHat"
 
-- name: RedHat/CentOS | Refresh yum metadata cache if repository changed
+- name: repository | RedHat/CentOS | Refresh yum metadata cache if repository changed
   ansible.builtin.command: yum clean metadata
   when:
     - gitlab_runner_repository_state.changed
@@ -29,13 +29,13 @@
   tags:
     - skip_ansible_lint
 
-- name: Debian/Ubuntu | Add GitLab runner repository key
+- name: repository | Debian/Ubuntu | Add GitLab runner repository key
   ansible.builtin.apt_key:
     url: "{{ gitlab_runner_repository_key }}"
     state: present
   when: ansible_os_family == "Debian"
 
-- name: Debian/Ubuntu | Add GitLab runner repository
+- name: repository | Debian/Ubuntu | Add GitLab runner repository
   ansible.builtin.template:
     src: "repository/deb.j2"
     dest: "/etc/apt/sources.list.d/gitlab-runner.list"
@@ -45,7 +45,7 @@
   register: gitlab_runner_repository_state
   when: ansible_os_family == "Debian"
 
-- name: Debian/Ubuntu | Update repository cache if repository changed
+- name: repository | Debian/Ubuntu | Update repository cache if repository changed
   ansible.builtin.apt:
     update_cache: true
   when:

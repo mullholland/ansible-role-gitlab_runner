@@ -1,12 +1,12 @@
 ---
-- name: create gitlab-runner group
+- name: runner-install | create gitlab-runner group
   ansible.builtin.group:
     name: "{{ gitlab_runner_group }}"
     gid: "{{ gitlab_runner_group_gid }}"
     state: present
   when: gitlab_runner_user_enable | bool
 
-- name: create gitlab-runner user
+- name: runner-install | create gitlab-runner user
   ansible.builtin.user:
     name: "{{ gitlab_runner_user }}"
     uid: "{{ gitlab_runner_user_uid }}"
@@ -16,13 +16,13 @@
     comment: gitlab-runner
   when: gitlab_runner_user_enable | bool
 
-- name: Install gitlab-runner dependencies
+- name: runner-install | Install gitlab-runner dependencies
   ansible.builtin.package:
     name: "{{ gitlab_runner_package_dependencies }}"
     state: present
     update_cache: true
 
-- name: Install gitlab-runner
+- name: runner-install | Install gitlab-runner
   ansible.builtin.package:
     name: "{{ gitlab_runner_package }}"
     state: present

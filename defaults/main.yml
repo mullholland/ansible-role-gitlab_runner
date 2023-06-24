@@ -7,9 +7,7 @@ gitlab_runner_repository_key_pub: 'https://packages.gitlab.com/runner/gitlab-run
 # Enable if you want an other user, as provided by the package
 gitlab_runner_user_enable: false
 gitlab_runner_user: "gitlab-runner"
-gitlab_runner_user_id: "999"
 gitlab_runner_group: "gitlab-runner"
-gitlab_runner_group_id: "999"
 
 # Package name which to install
 gitlab_runner_package: "gitlab-runner"

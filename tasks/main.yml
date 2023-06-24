@@ -8,14 +8,14 @@
     - '{{ ansible_system }}.yml'
 
 - name: add gitlab-runner repository
-  include_tasks: repository.yml
+  ansible.builtin.include_tasks: repository.yml
 
 - name: install gitlab-runner
-  include_tasks: runner-install.yml
+  ansible.builtin.include_tasks: runner-install.yml
 
 - name: configure gitlab-runner
-  include_tasks: runner-config.yml
+  ansible.builtin.include_tasks: runner-config.yml
 
 - name: register gitlab-runner
-  include_tasks: runner-register.yml
+  ansible.builtin.include_tasks: runner-register.yml
   when: not gitlab_runner_skip_registration | bool
