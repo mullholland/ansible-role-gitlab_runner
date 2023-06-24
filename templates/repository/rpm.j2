@@ -2,24 +2,34 @@
 # Official gitlab-runner repository
 
 [runner_gitlab_runner]
+{% if ansible_distribution == "Amazon" %}
+baseurl=https://packages.gitlab.com/runner/gitlab-runner/amazon/{{ ansible_distribution_major_version }}/$basearch
+{% else %}
 baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/{{ ansible_distribution_major_version }}/$basearch
+{% endif %}
 repo_gpgcheck=1
 gpgcheck=1
 enabled=1
 gpgkey={{ gitlab_runner_repository_key }}
        {{ gitlab_runner_repository_key_pub }}
+       {{ gitlab_runner_repository_key_pub2 }}
 sslverify=1
 sslcacert=/etc/pki/tls/certs/ca-bundle.crt
 metadata_expire=300
 
 [runner_gitlab_runner-source]
 name=runner_gitlab-runner-source
+{% if ansible_distribution == "Amazon" %}
+baseurl=https://packages.gitlab.com/runner/gitlab-runner/amazon/{{ ansible_distribution_major_version }}/SRPMS
+{% else %}
 baseurl=https://packages.gitlab.com/runner/gitlab-runner/el/{{ ansible_distribution_major_version }}/SRPMS
+{% endif %}
 repo_gpgcheck=1
 gpgcheck=1
 enabled=1
 gpgkey={{ gitlab_runner_repository_key }}
        {{ gitlab_runner_repository_key_pub }}
+       {{ gitlab_runner_repository_key_pub2 }}
 sslverify=1
 sslcacert=/etc/pki/tls/certs/ca-bundle.crt
 metadata_expire=300

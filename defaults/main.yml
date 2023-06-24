@@ -2,14 +2,13 @@
 # Repository
 gitlab_runner_repository_key: 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey'
 gitlab_runner_repository_key_pub: 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg'  # noqa 204
+gitlab_runner_repository_key_pub2: 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-49F16C5CC3A0F81F.pub.gpg'  # noqa 204
 
 # Runtime user and group for the gitlab_runner service
 # Enable if you want an other user, as provided by the package
 gitlab_runner_user_enable: false
 gitlab_runner_user: "gitlab-runner"
-gitlab_runner_user_id: "999"
 gitlab_runner_group: "gitlab-runner"
-gitlab_runner_group_id: "999"
 
 # Package name which to install
 gitlab_runner_package: "gitlab-runner"

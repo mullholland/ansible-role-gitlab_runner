@@ -1,0 +1,8 @@
+---
+#
+# Ansible managed
+#
+repository:
+  description: Installs and configures a GitLab Runner.
+  homepage: https://mullholland.net
+  topics: development, packaging, system, ansible, molecule, tox, playbook
