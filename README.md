@@ -1,11 +1,10 @@
-# [gitlab_runner](#gitlab_runner)
+# [Ansible role gitlab_runner](#gitlab_runner)
 
 Installs and configures a GitLab Runner.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/mullholland/ansible-role-gitlab_runner/workflows/Ansible%20Molecule/badge.svg)](https://github.com/mullholland/ansible-role-gitlab_runner/actions)|[![gitlab](https://gitlab.com/opensourceunicorn/ansible-role-gitlab_runner/badges/master/pipeline.svg)](https://gitlab.com/opensourceunicorn/ansible-role-gitlab_runner)|[![quality](https://img.shields.io/ansible/quality/58825)](https://galaxy.ansible.com/mullholland/gitlab_runner)|[![downloads](https://img.shields.io/ansible/role/d/58825)](https://galaxy.ansible.com/mullholland/gitlab_runner)|[![Version](https://img.shields.io/github/release/mullholland/ansible-role-gitlab_runner.svg)](https://github.com/mullholland/ansible-role-gitlab_runner/releases/)|
-
+|GitHub|Downloads|Version|
+|------|---------|-------|
+|[![github](https://github.com/mullholland/ansible-role-gitlab_runner/actions/workflows/molecule.yml/badge.svg)](https://github.com/mullholland/ansible-role-gitlab_runner/actions/workflows/molecule.yml)|[![downloads](https://img.shields.io/ansible/role/d/mullholland/gitlab_runner)](https://galaxy.ansible.com/mullholland/gitlab_runner)|[![Version](https://img.shields.io/github/release/mullholland/ansible-role-gitlab_runner.svg)](https://github.com/mullholland/ansible-role-gitlab_runner/releases/)|
 ## [Example Playbook](#example-playbook)
 
 This example is taken from [`molecule/default/converge.yml`](https://github.com/mullholland/ansible-role-gitlab_runner/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
@@ -38,6 +37,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ```
 
 
+
 ## [Role Variables](#role-variables)
 
 The default values for the variables are set in [`defaults/main.yml`](https://github.com/mullholland/ansible-role-gitlab_runner/blob/master/defaults/main.yml):
@@ -47,14 +47,13 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # Repository
 gitlab_runner_repository_key: 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey'
 gitlab_runner_repository_key_pub: 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-4C80FB51394521E9.pub.gpg'  # noqa 204
+gitlab_runner_repository_key_pub2: 'https://packages.gitlab.com/runner/gitlab-runner/gpgkey/runner-gitlab-runner-49F16C5CC3A0F81F.pub.gpg'  # noqa 204
 
 # Runtime user and group for the gitlab_runner service
 # Enable if you want an other user, as provided by the package
 gitlab_runner_user_enable: false
 gitlab_runner_user: "gitlab-runner"
-gitlab_runner_user_id: "999"
 gitlab_runner_group: "gitlab-runner"
-gitlab_runner_group_id: "999"
 
 # Package name which to install
 gitlab_runner_package: "gitlab-runner"
@@ -135,10 +134,10 @@ This role has been tested on these [container images](https://hub.docker.com/u/m
 
 |container|tags|
 |---------|----|
-|[EL](https://hub.docker.com/repository/docker/mullholland/docker-centos-systemd/general)|all|
-|[Amazon](https://hub.docker.com/repository/docker/mullholland/docker-amazonlinux-systemd/general)|Candidate|
-|[Ubuntu](https://hub.docker.com/repository/docker/mullholland/docker-ubuntu-systemd/general)|all|
-|[Debian](https://hub.docker.com/repository/docker/mullholland/docker-debian-systemd/general)|all|
+|[EL](https://hub.docker.com/r/mullholland/enterpriselinux)|all|
+|[Amazon](https://hub.docker.com/r/mullholland/amazonlinux)|Candidate|
+|[Ubuntu](https://hub.docker.com/r/mullholland/ubuntu)|all|
+|[Debian](https://hub.docker.com/r/mullholland/debian)|all|
 
 The minimum version of Ansible required is 2.10, tests have been done to:
 
@@ -146,7 +145,7 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/mullholland/ansible-role-gitlab_runner/issues)
+If you find issues, please register them in [GitHub](https://github.com/mullholland/ansible-role-gitlab_runner/issues).
 
 ## [License](#license)
 
@@ -155,5 +154,3 @@ If you find issues, please register them in [GitHub](https://github.com/mullholl
 ## [Author Information](#author-information)
 
 [Mullholland](https://mullholland.net)
-
-Please consider [sponsoring me](https://github.com/sponsors/mullholland).
